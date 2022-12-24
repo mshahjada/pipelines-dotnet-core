@@ -23,14 +23,20 @@ steps:
   inputs:
     command: 'restore'
     restoreSolution: $(solution)
-- task: VSBuild@1
-  displayName: 'Build application'
+- task: DotNetCoreCLI@2
+  displayName: Build
   inputs:
-    clean: true
-    solution: $(solution)
-    msbuildArgs: '/p:DeployOnBuild=true /p:SkipInvalidConfiguration=true p:/PackageAsSingleFile=true p:/WebPublishMethod=Package /P:Packagelocation=$(build.artifactstagingdirectory)'
-    platform: $(buildPlatform)
-    configuration: $(buildConfiguration)
+    command: build
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
+
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Build Artifact'
   inputs:
