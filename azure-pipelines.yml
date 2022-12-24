@@ -11,7 +11,7 @@ pool:
   vmImage: BS0389
 
 variables:
-  solution: '**/*.csproj'
+  solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
