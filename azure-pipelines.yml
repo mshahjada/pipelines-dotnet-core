@@ -23,10 +23,16 @@ steps:
   inputs:
     command: 'restore'
     restoreSolution: $(solution)
-- task: DotNetCoreCLI@2
-  displayName: 'Publish atrifacts to azure pipeline $(Build.ArtifactStagingDirectory)'
+- task: VSBuild@1
+  displayName: 'Build application'
   inputs:
-    command: 'publish'
-    publishWebProjects: true
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: true
+    solution: $(solution)
+    msbuildArgs: '/p:DeployOnBuild=true /p:SkipInvalidConfiguration=true p:/PackageAsSingleFile=true p:/WebPublishMethod=Package /P:PackageLocation=$(Build.ArtifactStagingDirectory)'
+    platform: $(buildPlatform)
+    configuration: $(buildConfiguration)
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Build Artifact'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'codespace-drop'
