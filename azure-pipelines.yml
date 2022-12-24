@@ -11,7 +11,7 @@ pool:
   vmImage: BS0389
 
 variables:
-  solution: '**/*.sln'
+  solution: '**/*.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -31,7 +31,6 @@ steps:
     msbuildArgs: '/p:DeployOnBuild=true /p:SkipInvalidConfiguration=true p:/PackageAsSingleFile=true p:/WebPublishMethod=Package /P:Packagelocation=$(build.artifactstagingdirectory)'
     platform: $(buildPlatform)
     configuration: $(buildConfiguration)
-
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Build Artifact'
   inputs:
