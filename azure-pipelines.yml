@@ -28,7 +28,7 @@ steps:
   inputs:
     clean: true
     solution: $(solution)
-    msbuildArgs: '/p:DeployOnBuild=true /p:SkipInvalidConfiguration=true p:/PackageAsSingleFile=true p:/WebPublishMethod=Package /P:PackageLocation=$(Build.ArtifactStagingDirectory)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:SkipInvalidConfiguration=true p:/PackageAsSingleFile=true p:/WebPublishMethod=Package /P:OutDir=$(Build.ArtifactStagingDirectory)'
     platform: $(buildPlatform)
     configuration: $(buildConfiguration)
 
