@@ -28,12 +28,12 @@ steps:
   inputs:
     clean: true
     solution: $(solution)
-    msbuildArgs: '/p:DeployOnBuild=true /p:SkipInvalidConfiguration=true p:/PackageAsSingleFile=true p:/WebPublishMethod=Package /P:OutDir=$(Build.ArtifactStagingDirectory)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:SkipInvalidConfiguration=true p:/PackageAsSingleFile=true p:/WebPublishMethod=Package /P:Packagelocation=$(build.artifactstagingdirectory)'
     platform: $(buildPlatform)
     configuration: $(buildConfiguration)
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Build Artifact'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(build.artifactstagingdirectory)'
     ArtifactName: 'codespace-drop'
