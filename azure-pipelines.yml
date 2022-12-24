@@ -18,9 +18,14 @@ steps:
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
+  displayName: 'Nuget package restore'
   inputs:
     command: 'restore'
     restoreSolution: $(solution)
 - task: DotNetCoreCLI@2
+  displayName: 'Publish atrifacts to azure pipeline'
   inputs:
-    command: 'build'
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
