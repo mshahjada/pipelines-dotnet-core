@@ -23,7 +23,7 @@ steps:
     command: 'restore'
     restoreSolution: $(solution)
 - task: DotNetCoreCLI@2
-  displayName: 'Publish atrifacts to azure pipeline'
+  displayName: 'Publish atrifacts to azure pipeline $(Build.ArtifactStagingDirectory)'
   inputs:
     command: 'publish'
     publishWebProjects: true
