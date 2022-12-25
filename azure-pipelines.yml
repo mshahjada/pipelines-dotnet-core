@@ -10,6 +10,18 @@ pool:
   name: 'default'
   vmImage: BS0389
 
+parameters:
+- name: WebsiteName
+  type: string
+  default: Codespace
+- name: WebsitePhysicalPath
+  type: string
+  default: '%SystemDrive%\appdeploy\codespace'
+- name: AddBinding
+  type: number
+  default: 90
+
+
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
